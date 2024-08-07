@@ -20,11 +20,14 @@ public class TransparentDetection : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<PlayerController>() || other.gameObject.GetComponent<EnemyPathfinding>())
+        if (other.gameObject.GetComponent<PlayerController>()
+            // || other.gameObject.GetComponent<EnemyPathfinding>()
+            )
         {
             if (spriteRenderer)
             {
-                spriteRenderer.sortingLayerName = "Above";
+                // spriteRenderer.sortingLayerName = "LayerUp";
+                spriteRenderer.sortingOrder -= 2;
                 StartCoroutine(FadeRoutine(spriteRenderer, fadeTime, spriteRenderer.color.a, transparencyAmount));
             }
             else if (tilemap)
@@ -36,11 +39,14 @@ public class TransparentDetection : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<PlayerController>() || other.gameObject.GetComponent<EnemyPathfinding>())
+        if (other.gameObject.GetComponent<PlayerController>()
+            // || other.gameObject.GetComponent<EnemyPathfinding>()
+            )
         {
             if (spriteRenderer)
             {
-                spriteRenderer.sortingLayerName = "Collision";
+                // spriteRenderer.sortingLayerName = "Collision";
+                spriteRenderer.sortingOrder += 2;
                 StartCoroutine(FadeRoutine(spriteRenderer, fadeTime, spriteRenderer.color.a, 1f));
             }
             else if (tilemap)

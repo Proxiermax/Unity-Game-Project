@@ -44,10 +44,13 @@ TagManager:
   - name: Ground
     uniqueID: 3919556559
     locked: 0
+  - name: Basin
+    uniqueID: 3506142343
+    locked: 0
   - name: Foreground
     uniqueID: 1081820813
     locked: 0
-  - name: Footpath
+  - name: Walkpath
     uniqueID: 2742173391
     locked: 0
   - name: Collision
@@ -59,6 +62,9 @@ TagManager:
   - name: Player
     uniqueID: 2605282281
     locked: 0
-  - name: Above
+  - name: LayerUp
+    uniqueID: 1602028431
+    locked: 0
+  - name: Top Map
     uniqueID: 2188519943
     locked: 0
