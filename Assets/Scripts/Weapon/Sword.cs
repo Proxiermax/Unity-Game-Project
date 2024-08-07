@@ -2,30 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sword : MonoBehaviour
+public class Sword : MonoBehaviour, IWeapon
 {
     [SerializeField] private GameObject slashAnimPrefab;
     [SerializeField] private Transform slashAnimSpawnPoint;
-    [SerializeField] private Transform weaponCollider;
+    // [SerializeField] private Transform weaponCollider;
     [SerializeField] private float swordAttackCD = .5f;
 
-    private PlayerControls playerControls;
+    private Transform weaponCollider;
+    // private PlayerControls playerControls;
     private Animator myAnimator;
-    private PlayerController playerController;
-    private ActiveWeapon activeWeapon;
-    private bool attackButtonDown, isAttacking = false;
+    // private PlayerController playerController;
+    // private ActiveWeapon activeWeapon;
+    // private bool attackButtonDown, isAttacking = false;
 
     private GameObject slashAnim;
 
     private void Awake()
     {
-        playerController = GetComponentInParent<PlayerController>();
-        activeWeapon = GetComponentInParent<ActiveWeapon>();
+        // playerController = GetComponentInParent<PlayerController>();
+        // activeWeapon = GetComponentInParent<ActiveWeapon>();
         myAnimator = GetComponent<Animator>();
-        playerControls = new PlayerControls();
+        // playerControls = new PlayerControls();
     }
 
-    private void OnEnable()
+    private void Start()
+    {
+        weaponCollider = PlayerController.Instance.GetWeaponCollider();
+        slashAnimSpawnPoint = GameObject.Find("SlashSpawnPoint").transform;
+    }
+
+    /*private void OnEnable()
     {
         playerControls.Enable();
     }
@@ -34,15 +41,15 @@ public class Sword : MonoBehaviour
     {
         playerControls.Combat.Attack.started += _ => StartAttacking();
         playerControls.Combat.Attack.canceled += _ => StopAttacking();
-    }
+    }*/
 
     private void Update()
     {
         MouseFollowWithOffset();
-        Attack();
+        // Attack();
     }
 
-    private void StartAttacking()
+    /*private void StartAttacking()
     {
         attackButtonDown = true;
     }
@@ -50,25 +57,23 @@ public class Sword : MonoBehaviour
     private void StopAttacking()
     {
         attackButtonDown = false;
-    }
+    }*/
 
-    private void Attack()
+    public void Attack()
     {
-        if (attackButtonDown && !isAttacking)
-        {
-            isAttacking = true;
-            myAnimator.SetTrigger("Attack");
-            weaponCollider.gameObject.SetActive(true);
-            slashAnim = Instantiate(slashAnimPrefab, slashAnimSpawnPoint.position, Quaternion.identity);
-            slashAnim.transform.parent = this.transform.parent;
-            StartCoroutine(AttackCDRoutine());
-        }
+        // isAttacking = true;
+        myAnimator.SetTrigger("Attack");
+        weaponCollider.gameObject.SetActive(true);
+        slashAnim = Instantiate(slashAnimPrefab, slashAnimSpawnPoint.position, Quaternion.identity);
+        slashAnim.transform.parent = this.transform.parent;
+        StartCoroutine(AttackCDRoutine());
     }
 
     private IEnumerator AttackCDRoutine()
     {
         yield return new WaitForSeconds(swordAttackCD);
-        isAttacking = false;
+        ActiveWeapon.Instance.ToggleIsAttacking(false);
+        // isAttacking = false;
     }
 
     public void DoneAttackingAnimEvent()
@@ -81,7 +86,7 @@ public class Sword : MonoBehaviour
     {
         slashAnim.gameObject.transform.rotation = Quaternion.Euler(-180, 0, 0);
 
-        if (playerController.FacingLeft)
+        if (PlayerController.Instance.FacingLeft)
         {
             slashAnim.GetComponent<SpriteRenderer>().flipX = true;
         }
@@ -91,7 +96,7 @@ public class Sword : MonoBehaviour
     {
         slashAnim.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        if (playerController.FacingLeft)
+        if (PlayerController.Instance.FacingLeft)
         {
             slashAnim.GetComponent<SpriteRenderer>().flipX = true;
         }
@@ -100,18 +105,18 @@ public class Sword : MonoBehaviour
     private void MouseFollowWithOffset()
     {
         Vector3 mousePos = Input.mousePosition;
-        Vector3 playerScreenPoint = Camera.main.WorldToScreenPoint(playerController.transform.position);
+        Vector3 playerScreenPoint = Camera.main.WorldToScreenPoint(PlayerController.Instance.transform.position);
 
         float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
 
         if (mousePos.x < playerScreenPoint.x)
         {
-            activeWeapon.transform.rotation = Quaternion.Euler(0, -180, angle);
+            ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, -180, angle);
             weaponCollider.transform.rotation = Quaternion.Euler(0, -180, 0);
         }
         else
         {
-            activeWeapon.transform.rotation = Quaternion.Euler(0, 0, angle);
+            ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, angle);
             weaponCollider.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }

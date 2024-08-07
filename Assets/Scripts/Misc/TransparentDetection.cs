@@ -27,7 +27,6 @@ public class TransparentDetection : MonoBehaviour
             if (spriteRenderer)
             {
                 // spriteRenderer.sortingLayerName = "LayerUp";
-                spriteRenderer.sortingOrder -= 2;
                 StartCoroutine(FadeRoutine(spriteRenderer, fadeTime, spriteRenderer.color.a, transparencyAmount));
             }
             else if (tilemap)
@@ -46,7 +45,6 @@ public class TransparentDetection : MonoBehaviour
             if (spriteRenderer)
             {
                 // spriteRenderer.sortingLayerName = "Collision";
-                spriteRenderer.sortingOrder += 2;
                 StartCoroutine(FadeRoutine(spriteRenderer, fadeTime, spriteRenderer.color.a, 1f));
             }
             else if (tilemap)
