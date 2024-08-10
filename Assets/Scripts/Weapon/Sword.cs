@@ -6,24 +6,16 @@ public class Sword : MonoBehaviour, IWeapon
 {
     [SerializeField] private GameObject slashAnimPrefab;
     [SerializeField] private Transform slashAnimSpawnPoint;
-    // [SerializeField] private Transform weaponCollider;
     [SerializeField] private float swordAttackCD = .5f;
+    [SerializeField] private WeaponInfo weaponInfo;
 
     private Transform weaponCollider;
-    // private PlayerControls playerControls;
     private Animator myAnimator;
-    // private PlayerController playerController;
-    // private ActiveWeapon activeWeapon;
-    // private bool attackButtonDown, isAttacking = false;
-
     private GameObject slashAnim;
 
     private void Awake()
     {
-        // playerController = GetComponentInParent<PlayerController>();
-        // activeWeapon = GetComponentInParent<ActiveWeapon>();
         myAnimator = GetComponent<Animator>();
-        // playerControls = new PlayerControls();
     }
 
     private void Start()
@@ -32,48 +24,22 @@ public class Sword : MonoBehaviour, IWeapon
         slashAnimSpawnPoint = GameObject.Find("SlashSpawnPoint").transform;
     }
 
-    /*private void OnEnable()
-    {
-        playerControls.Enable();
-    }
-
-    void Start()
-    {
-        playerControls.Combat.Attack.started += _ => StartAttacking();
-        playerControls.Combat.Attack.canceled += _ => StopAttacking();
-    }*/
-
     private void Update()
     {
         MouseFollowWithOffset();
-        // Attack();
     }
 
-    /*private void StartAttacking()
+    public WeaponInfo GetWeaponInfo()
     {
-        attackButtonDown = true;
+        return weaponInfo;
     }
-
-    private void StopAttacking()
-    {
-        attackButtonDown = false;
-    }*/
 
     public void Attack()
     {
-        // isAttacking = true;
         myAnimator.SetTrigger("Attack");
         weaponCollider.gameObject.SetActive(true);
         slashAnim = Instantiate(slashAnimPrefab, slashAnimSpawnPoint.position, Quaternion.identity);
         slashAnim.transform.parent = this.transform.parent;
-        StartCoroutine(AttackCDRoutine());
-    }
-
-    private IEnumerator AttackCDRoutine()
-    {
-        yield return new WaitForSeconds(swordAttackCD);
-        ActiveWeapon.Instance.ToggleIsAttacking(false);
-        // isAttacking = false;
     }
 
     public void DoneAttackingAnimEvent()

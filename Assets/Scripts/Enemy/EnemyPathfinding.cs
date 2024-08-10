@@ -36,6 +36,11 @@ public class EnemyPathfinding : MonoBehaviour
         enemyAnimator.SetFloat("moveY", moveDir.y);
     }
 
+    public void StopMoving()
+    {
+        moveDir = Vector2.zero;
+    }
+
     private void AdjustEnemyFacingDirection()
     {
         if (moveDir.x < 0)

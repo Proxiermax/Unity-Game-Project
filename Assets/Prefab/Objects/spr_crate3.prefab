@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 774807768414900458}
   - component: {fileID: 6995948917800236685}
   - component: {fileID: 1139878931382708937}
+  - component: {fileID: -65544724664178617}
   - component: {fileID: 2095357872076836691}
   - component: {fileID: 641957171324977555}
   m_Layer: 0
@@ -115,6 +116,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyVFX: {fileID: 1926250960936210915, guid: 7180553a41f1bc04184e875d0c486c07, type: 3}
+--- !u!114 &-65544724664178617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351350077953237237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d67f131c514c3c4d9bd9331a602d035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &2095357872076836691
 BoxCollider2D:
   m_ObjectHideFlags: 0
