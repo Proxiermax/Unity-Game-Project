@@ -16,11 +16,12 @@ GameObject:
   - component: {fileID: 6032582537307201005}
   - component: {fileID: 6625280639975695582}
   - component: {fileID: 6368963658608107680}
+  - component: {fileID: -3110436321645411169}
   - component: {fileID: 3317643968760150895}
   - component: {fileID: 6656316899825357685}
   - component: {fileID: 7382274638788872101}
   m_Layer: 0
-  m_Name: Green Slime
+  m_Name: Lime Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +81,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1655570313
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 1661880720, guid: 59932a4a736606e4090dad06a1cda65a, type: 3}
   m_Color: {r: 1, g: 1, b: 0, a: 1}
@@ -186,6 +187,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whiteFlashMat: {fileID: 2100000, guid: 76591052a69b9b74bb6b7d12fd9aa3b1, type: 2}
   restoreDefaultMatTime: 0.2
+--- !u!114 &-3110436321645411169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3121600059521408799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d1dd84d8b5a764bb08370dfb902d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldCoin: {fileID: 4812503943789418175, guid: a02e8736a9e80054a969cd1584050490, type: 3}
+  healthGlobe: {fileID: 4812503943789418175, guid: 9183625b0d622ec49aa28565368f8cb3, type: 3}
+  staminaGlobe: {fileID: 4812503943789418175, guid: 9858f6db7c282ab4baa22dfa51ba2b50, type: 3}
 --- !u!114 &3317643968760150895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,8 +217,13 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1493350120559198424, guid: 2c514d0bfc10e844796b8121a258d8a7, type: 3}
   bulletMoveSpeed: 5
   burstCount: 5
-  timeBetweenBursts: 0.5
+  projectilesPerBurst: 1
+  angleSpread: 0
+  startingDistance: 0.1
+  timeBetweenBursts: 0.25
   restTime: 0.5
+  stagger: 0
+  oscillate: 0
 --- !u!50 &6656316899825357685
 Rigidbody2D:
   serializedVersion: 4

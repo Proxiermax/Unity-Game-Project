@@ -53,6 +53,9 @@ TagManager:
   - name: Walkpath
     uniqueID: 2742173391
     locked: 0
+  - name: Hidden
+    uniqueID: 3254074305
+    locked: 0
   - name: Collision
     uniqueID: 3851001429
     locked: 0

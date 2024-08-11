@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -5214482716554626409}
   - component: {fileID: -8139053137573452953}
   - component: {fileID: 1609486032123821389}
+  - component: {fileID: -1725567417234422322}
   - component: {fileID: 5804482721798568971}
   - component: {fileID: 4528484216136820387}
   m_Layer: 0
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1655570313
-  m_SortingLayer: 5
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 1661880720, guid: 59932a4a736606e4090dad06a1cda65a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -125,6 +126,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01d87a56d3a16574484be7eb98f54059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roamChangeDirFloat: 2
+  attackRange: 5
+  enemyType: {fileID: 0}
+  attackCooldown: 2
+  stopMovingWhileAttacking: 0
 --- !u!114 &6438696026620068476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 3
   deathVFXPrefab: {fileID: 6062435374932228569, guid: 85bd2c5450b33b047ab13c91eacefb05, type: 3}
+  knockBackThrust: 15
 --- !u!114 &-8139053137573452953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,6 +186,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whiteFlashMat: {fileID: 2100000, guid: 76591052a69b9b74bb6b7d12fd9aa3b1, type: 2}
   restoreDefaultMatTime: 0.2
+--- !u!114 &-1725567417234422322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646297155944813360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d1dd84d8b5a764bb08370dfb902d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldCoin: {fileID: 4812503943789418175, guid: a02e8736a9e80054a969cd1584050490, type: 3}
+  healthGlobe: {fileID: 4812503943789418175, guid: 9183625b0d622ec49aa28565368f8cb3, type: 3}
+  staminaGlobe: {fileID: 4812503943789418175, guid: 9858f6db7c282ab4baa22dfa51ba2b50, type: 3}
 --- !u!50 &5804482721798568971
 Rigidbody2D:
   serializedVersion: 4

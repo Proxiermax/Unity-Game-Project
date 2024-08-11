@@ -47,11 +47,11 @@ public class EnemyAI : MonoBehaviour
             default:
             case State.Roaming:
                 Roaming();
-                break;
+            break;
 
             case State.Attacking:
                 Attacking();
-                break;
+            break;
         }
     }
 

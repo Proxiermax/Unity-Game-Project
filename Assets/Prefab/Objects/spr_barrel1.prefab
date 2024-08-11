@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2619577548042261304}
   - component: {fileID: 2981852839429278617}
   - component: {fileID: 5731966837618534639}
+  - component: {fileID: 3682206730039910311}
   - component: {fileID: 1322151192374478049}
   - component: {fileID: 344605444829510416}
   m_Layer: 0
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -443965867
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1e4915aa5175ecc49a56a2e0c35452ad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -128,6 +129,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d67f131c514c3c4d9bd9331a602d035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3682206730039910311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5981978055962761412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d1dd84d8b5a764bb08370dfb902d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldCoin: {fileID: 4812503943789418175, guid: a02e8736a9e80054a969cd1584050490, type: 3}
+  healthGlobe: {fileID: 4812503943789418175, guid: 9183625b0d622ec49aa28565368f8cb3, type: 3}
+  staminaGlobe: {fileID: 4812503943789418175, guid: 9858f6db7c282ab4baa22dfa51ba2b50, type: 3}
 --- !u!70 &1322151192374478049
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
