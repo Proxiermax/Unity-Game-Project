@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 8168232548581253348}
   - component: {fileID: 1163436039067795273}
   - component: {fileID: 8742951067394229090}
+  - component: {fileID: 2786525103873534418}
   - component: {fileID: 5687814389096053806}
   - component: {fileID: 7094402638485262947}
   - component: {fileID: 2284104819472516975}
@@ -285,7 +286,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1689685015
-  m_SortingLayer: 7
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 1316786773, guid: 04da7bc6f5c683c4897f26815f8e6a51, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -377,6 +378,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockBackTime: 0.2
+--- !u!114 &2786525103873534418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5701650877246088914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c625de2804b20fd47b16de9ff617ed6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullStaminaImage: {fileID: 21300000, guid: 8a6764d0cf6e06044af0c4796a4a0afb, type: 3}
+  emptyStaminaImage: {fileID: 21300000, guid: b70403a5ad7c61a418640a165f7b106a, type: 3}
+  timeBetweenStaminaRefresh: 5
 --- !u!50 &5687814389096053806
 Rigidbody2D:
   serializedVersion: 4
@@ -448,7 +464,7 @@ SortingGroup:
   m_GameObject: {fileID: 5701650877246088914}
   m_Enabled: 1
   m_SortingLayerID: -1689685015
-  m_SortingLayer: 7
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!1 &6735054400831662772
