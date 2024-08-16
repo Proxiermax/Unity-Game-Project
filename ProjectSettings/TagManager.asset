@@ -44,13 +44,13 @@ TagManager:
   - name: Ground
     uniqueID: 3919556559
     locked: 0
-  - name: Basin
+  - name: Pool
     uniqueID: 3506142343
     locked: 0
   - name: Foreground
     uniqueID: 1081820813
     locked: 0
-  - name: Walkpath
+  - name: Soil Path
     uniqueID: 2742173391
     locked: 0
   - name: Hidden
@@ -65,10 +65,10 @@ TagManager:
   - name: Player
     uniqueID: 2605282281
     locked: 0
-  - name: LayerUp
+  - name: Upper
     uniqueID: 1602028431
     locked: 0
-  - name: Top Map
+  - name: Above Tiles
     uniqueID: 2188519943
     locked: 0
   - name: UI Layer

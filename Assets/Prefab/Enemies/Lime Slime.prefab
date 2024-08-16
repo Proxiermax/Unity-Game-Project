@@ -36,7 +36,7 @@ Transform:
   m_GameObject: {fileID: 3121600059521408799}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.03, y: -0.56, z: -0.076769955}
+  m_LocalPosition: {x: -10.92, y: -4.08, z: -0.076769955}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -216,12 +216,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1493350120559198424, guid: 2c514d0bfc10e844796b8121a258d8a7, type: 3}
   bulletMoveSpeed: 5
-  burstCount: 5
+  burstCount: 3
   projectilesPerBurst: 1
   angleSpread: 0
   startingDistance: 0.1
-  timeBetweenBursts: 0.25
-  restTime: 0.5
+  timeBetweenBursts: 0.3
+  restTime: 1
   stagger: 0
   oscillate: 0
 --- !u!50 &6656316899825357685

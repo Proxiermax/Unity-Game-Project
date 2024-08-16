@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class PlayerHealth : Singleton<PlayerHealth>
 {
-    public bool isDead { get; private set; }
+    public bool isDead { get; set; }
+    public bool isWin { get; set; }
+    public string sceneName { get; private set; }
 
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private float knockBackThrustAmount = 10f;
@@ -19,8 +21,8 @@ public class PlayerHealth : Singleton<PlayerHealth>
     private Flash flash;
 
     const string HEALTH_SLIDER_TEXT = "Health Slider";
-    const string TOWN_TEXT = "Scene01";
     readonly int DEATH_HASH = Animator.StringToHash("Death");
+    private string pauseFeild;
 
     protected override void Awake()
     {
@@ -32,10 +34,22 @@ public class PlayerHealth : Singleton<PlayerHealth>
 
     private void Start()
     {
+        sceneName = SceneManager.GetActiveScene().name;
+        Debug.Log($"Player Address : {sceneName}");
+
         isDead = false;
+        isWin = false;
         currentHealth = maxHealth;
 
         UpdateHealthSlider();
+    }
+
+    private void Update()
+    {
+        if (isWin == true)
+        {
+            ValidateWinLevel();
+        }
     }
 
     private void OnCollisionStay2D(Collision2D other)
@@ -79,16 +93,116 @@ public class PlayerHealth : Singleton<PlayerHealth>
             Destroy(ActiveWeapon.Instance.gameObject);
             currentHealth = 0;
             GetComponent<Animator>().SetTrigger(DEATH_HASH);
+
+            PlayerPrefs.SetString("DeathAtLevel", sceneName);
             StartCoroutine(DeathLoadSceneRoutine());
         }
     }
 
     private IEnumerator DeathLoadSceneRoutine()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
-        SceneManager.LoadScene(TOWN_TEXT);
+        SceneManager.LoadScene("Game Over");
     }
+
+    private void ValidateWinLevel()
+    {
+        isDead = true;
+        if (ActiveWeapon.Instance != null)
+        {
+            Destroy(ActiveWeapon.Instance.gameObject);
+        }
+        currentHealth = 0;
+
+        PlayerPrefs.SetString("DeathAtLevel", sceneName);
+        StartCoroutine(WinLoadSceneRoutine());
+    }
+
+    private IEnumerator WinLoadSceneRoutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+        SceneManager.LoadScene("Win Level");
+    }
+
+    public void ResetPlayer()
+    {
+        if (this != null && !isDead)
+        {
+            isDead = true;
+            if (ActiveWeapon.Instance != null)
+            {
+                Destroy(ActiveWeapon.Instance.gameObject);
+            }
+            currentHealth = 0;
+
+            PlayerPrefs.SetString("PauseAtLevel", sceneName);
+            pauseFeild = SceneManager.GetActiveScene().name;
+            StartCoroutine(ResetPlayerRoutine());
+        }
+    }
+
+    public IEnumerator ResetPlayerRoutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        if (this != null) // Ensure the object is still valid
+        {
+            Destroy(gameObject);
+
+            if (pauseFeild == "Lv01-01" || pauseFeild == "Lv01-02" || pauseFeild == "Lv01-03")
+            {
+                SceneManager.LoadScene("Lv01-01");
+            }
+            else if (pauseFeild == "Lv02-01" || pauseFeild == "Lv02-02" || pauseFeild == "Lv02-03")
+            {
+                SceneManager.LoadScene("Lv02-01");
+            }
+            else if (pauseFeild == "Lv03-01" || pauseFeild == "Lv03-02" || pauseFeild == "Lv03-03")
+            {
+                SceneManager.LoadScene("Lv03-01");
+            }
+        }
+    }
+
+    public void QuitSuddenly()
+    {
+        if (!isDead)
+        {
+            isDead = true;
+
+            if (ActiveWeapon.Instance != null)
+            {
+                Destroy(ActiveWeapon.Instance.gameObject);
+            }
+
+            currentHealth = 0;
+
+            PlayerPrefs.SetString("PauseAtLevel", sceneName);
+            pauseFeild = SceneManager.GetActiveScene().name;
+
+            // Ensure this object exists before starting the coroutine
+            if (this != null)
+            {
+                StartCoroutine(QuitSuddenlyRoutine());
+            }
+        }
+    }
+
+
+    public IEnumerator QuitSuddenlyRoutine()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        // Check if the object still exists before proceeding
+        if (this != null)
+        {
+            Destroy(gameObject);
+            SceneManager.LoadScene("Main Menu");
+        }
+    }
+
 
     private IEnumerator DamageRecoveryRoutine()
     {
@@ -106,4 +220,10 @@ public class PlayerHealth : Singleton<PlayerHealth>
         healthSlider.maxValue = maxHealth;
         healthSlider.value = currentHealth;
     }
+
+    /*private void OnDestroy()
+    {
+        StopAllCoroutines();
+    }*/
+
 }
