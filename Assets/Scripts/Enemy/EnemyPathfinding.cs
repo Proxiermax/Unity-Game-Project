@@ -24,16 +24,27 @@ public class EnemyPathfinding : MonoBehaviour
     {
         if (knockback.GettingKnockedBack) { return; }
 
+        // rb.MovePosition(rb.position + moveDir * (moveSpeed * Time.fixedDeltaTime));
+        // AdjustEnemyFacingDirection();
+
         rb.MovePosition(rb.position + moveDir * (moveSpeed * Time.fixedDeltaTime));
-        AdjustEnemyFacingDirection();
+
+        if (moveDir.x < 0)
+        {
+            enemySpriteRender.flipX = true;
+        }
+        else if (moveDir.x > 0)
+        {
+            enemySpriteRender.flipX = false;
+        }
     }
 
     public void MoveTo(Vector2 targetPosition)
     {
         moveDir = targetPosition;
 
-        enemyAnimator.SetFloat("moveX", moveDir.x);
-        enemyAnimator.SetFloat("moveY", moveDir.y);
+        // enemyAnimator.SetFloat("enemyMoveX", moveDir.x);
+        // enemyAnimator.SetFloat("enemyMoveY", moveDir.y);
     }
 
     public void StopMoving()

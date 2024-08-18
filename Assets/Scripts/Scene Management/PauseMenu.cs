@@ -53,7 +53,7 @@ public class PauseMenu : MonoBehaviour
         else
         {
             Debug.LogError("PlayerHealth instance is null, cannot quit suddenly.");
-            SceneManager.LoadScene("Main Menu"); // Fallback in case PlayerHealth is already destroyed
+            SceneManager.LoadScene("Main Menu");
         }
         SetPauseState(false);
     }

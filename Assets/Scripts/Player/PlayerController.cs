@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : Singleton<PlayerController>
 {
     public bool FacingLeft { get { return facingLeft; } }
-    /*public static PlayerController Instance;*/
 
     [SerializeField] private float moveSpeed = 4f;
     [SerializeField] private float dashSpeed = 4f;
@@ -18,6 +17,7 @@ public class PlayerController : Singleton<PlayerController>
     private Animator myAnimator;
     private SpriteRenderer mySpriteRender;
     private Knockback knockback;
+    AudioManager audioManager;
     private float startingMoveSpeed;
 
     private bool facingLeft = false;
@@ -26,7 +26,6 @@ public class PlayerController : Singleton<PlayerController>
     protected override void Awake()
     {
         base.Awake();
-        /*Instance = this;*/
 
         playerControls = new PlayerControls();
         rb = GetComponent<Rigidbody2D>();
@@ -38,6 +37,7 @@ public class PlayerController : Singleton<PlayerController>
     private void Start()
     {
         playerControls.Combat.Dash.performed += _ => Dash();
+
         startingMoveSpeed = moveSpeed;
 
         ActiveInventory.Instance.EquipStartingWeapon();
@@ -56,6 +56,7 @@ public class PlayerController : Singleton<PlayerController>
     private void Update()
     {
         PlayerInput();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     private void FixedUpdate()
@@ -105,6 +106,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         if (!isDashing && Stamina.Instance.CurrentStamina > 0)
         {
+            audioManager.PlaySFX(audioManager.dashSound, 0.6f);
             Stamina.Instance.UseStamina();
             isDashing = true;
             moveSpeed *= dashSpeed;
@@ -122,5 +124,15 @@ public class PlayerController : Singleton<PlayerController>
         myTrailRenderer.emitting = false;
         yield return new WaitForSeconds(dashCD);
         isDashing = false;
+    }
+
+    private void ActiveDashSound()
+    {
+        if (audioManager.dashSound == null)
+        {
+            Debug.LogError("Dash sound is not assigned!");
+            return;
+        }
+        audioManager.PlaySFX(audioManager.dashSound, 0.5f);
     }
 }

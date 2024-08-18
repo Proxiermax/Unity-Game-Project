@@ -15,15 +15,15 @@ public class WinLevel : MonoBehaviour
 
     public void NextLevel()
     {
-        if (winAtLevel == "Lv01-01" || winAtLevel == "Lv01-02" || winAtLevel == "Lv01-03")
+        if (winAtLevel == "Lv01-03")
         {
             SceneManager.LoadScene("Lv02-01");
         }
-        else if (winAtLevel == "Lv02-01" || winAtLevel == "Lv02-02" || winAtLevel == "Lv02-03")
+        else if (winAtLevel == "Lv02-03")
         {
             SceneManager.LoadScene("Lv03-01");
         }
-        else if (winAtLevel == "Lv03-01" || winAtLevel == "Lv03-02" || winAtLevel == "Lv03-03")
+        else if (winAtLevel == "Lv03-03")
         {
             SceneManager.LoadScene("Main Menu");
         }
@@ -31,15 +31,16 @@ public class WinLevel : MonoBehaviour
 
     public void Retry()
     {
-        if (winAtLevel == "Lv01-01" || winAtLevel == "Lv01-02" || winAtLevel == "Lv01-03")
+
+        if (winAtLevel == "Lv01-03")
         {
             SceneManager.LoadScene("Lv01-01");
         }
-        else if (winAtLevel == "Lv02-01" || winAtLevel == "Lv02-02" || winAtLevel == "Lv02-03")
+        else if (winAtLevel == "Lv02-03")
         {
             SceneManager.LoadScene("Lv02-01");
         }
-        else if (winAtLevel == "Lv03-01" || winAtLevel == "Lv03-02" || winAtLevel == "Lv03-03")
+        else if (winAtLevel == "Lv03-03")
         {
             SceneManager.LoadScene("Lv03-01");
         }

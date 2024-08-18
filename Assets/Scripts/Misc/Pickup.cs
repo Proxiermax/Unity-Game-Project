@@ -21,14 +21,17 @@ public class Pickup : MonoBehaviour
 
     private Vector3 moveDir;
     private Rigidbody2D rb;
+    private AudioManager audioManager;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
+
     private void Start()
     {
         StartCoroutine(AnimCurveSpawnRoutine());
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     private void Update()
@@ -88,12 +91,15 @@ public class Pickup : MonoBehaviour
         switch (pickUpType)
         {
             case PickUpType.GoldCoin:
+                audioManager.PlaySFX(audioManager.coinSound, 0.2f);
                 EconomyManager.Instance.UpdateCurrentGold();
                 break;
             case PickUpType.HealthGlobe:
+                audioManager.PlaySFX(audioManager.healthSound, 0.6f);
                 PlayerHealth.Instance.HealPlayer();
                 break;
             case PickUpType.StaminaGlobe:
+                audioManager.PlaySFX(audioManager.staminaSound, 0.5f);
                 Stamina.Instance.RefreshStamina();
                 break;
         }

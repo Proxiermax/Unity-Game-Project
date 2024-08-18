@@ -5,10 +5,13 @@ using UnityEngine;
 public class ActiveWeapon : Singleton<ActiveWeapon>
 {
     public MonoBehaviour CurrentActiveWeapon { get; private set; }
-    // [SerializeField] private MonoBehaviour currentActiveWeapon;
 
     private PlayerControls playerControls;
+    private Sword sword;
+    private Bow bow;
+    private Staff staff;
     private float timeBetweenAttacks;
+    private string activeWeapon;
 
     private bool attackButtonDown, isAttacking = false;
 
@@ -40,7 +43,6 @@ public class ActiveWeapon : Singleton<ActiveWeapon>
     public void NewWeapon(MonoBehaviour newWeapon)
     {
         CurrentActiveWeapon = newWeapon;
-
         AttackCooldown();
         timeBetweenAttacks = (CurrentActiveWeapon as IWeapon).GetWeaponInfo().weaponCooldown;
     }

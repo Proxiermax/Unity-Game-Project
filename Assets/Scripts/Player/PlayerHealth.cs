@@ -15,10 +15,11 @@ public class PlayerHealth : Singleton<PlayerHealth>
     [SerializeField] private float damageRecoveryTime = 1f;
 
     private Slider healthSlider;
-    private int currentHealth;
-    private bool canTakeDamage = true;
     private Knockback knockback;
     private Flash flash;
+    AudioManager audioManager;
+    private int currentHealth;
+    private bool canTakeDamage = true;
 
     const string HEALTH_SLIDER_TEXT = "Health Slider";
     readonly int DEATH_HASH = Animator.StringToHash("Death");
@@ -34,7 +35,7 @@ public class PlayerHealth : Singleton<PlayerHealth>
 
     private void Start()
     {
-        sceneName = SceneManager.GetActiveScene().name;
+        
         Debug.Log($"Player Address : {sceneName}");
 
         isDead = false;
@@ -46,10 +47,9 @@ public class PlayerHealth : Singleton<PlayerHealth>
 
     private void Update()
     {
-        if (isWin == true)
-        {
-            ValidateWinLevel();
-        }
+        if (isWin == true) { ValidateWinLevel(); }
+        sceneName = SceneManager.GetActiveScene().name;
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
     private void OnCollisionStay2D(Collision2D other)
@@ -74,7 +74,7 @@ public class PlayerHealth : Singleton<PlayerHealth>
     public void TakeDamage(int damageAmount, Transform hitTransform)
     {
         if (!canTakeDamage) { return; }
-
+        audioManager.PlaySFX(audioManager.hit02Sound, 0.6f);
         ScreenShakeManager.Instance.ShakeScreen();
         knockback.GetKnockedBack(hitTransform, knockBackThrustAmount);
         StartCoroutine(flash.FlashRoutine());
@@ -115,7 +115,7 @@ public class PlayerHealth : Singleton<PlayerHealth>
         }
         currentHealth = 0;
 
-        PlayerPrefs.SetString("DeathAtLevel", sceneName);
+        PlayerPrefs.SetString("WinAtLevel", sceneName);
         StartCoroutine(WinLoadSceneRoutine());
     }
 
@@ -135,8 +135,8 @@ public class PlayerHealth : Singleton<PlayerHealth>
             {
                 Destroy(ActiveWeapon.Instance.gameObject);
             }
-            currentHealth = 0;
 
+            currentHealth = 0;
             PlayerPrefs.SetString("PauseAtLevel", sceneName);
             pauseFeild = SceneManager.GetActiveScene().name;
             StartCoroutine(ResetPlayerRoutine());
@@ -146,8 +146,7 @@ public class PlayerHealth : Singleton<PlayerHealth>
     public IEnumerator ResetPlayerRoutine()
     {
         yield return new WaitForSeconds(0.5f);
-
-        if (this != null) // Ensure the object is still valid
+        if (this != null)
         {
             Destroy(gameObject);
 
@@ -178,11 +177,9 @@ public class PlayerHealth : Singleton<PlayerHealth>
             }
 
             currentHealth = 0;
-
             PlayerPrefs.SetString("PauseAtLevel", sceneName);
             pauseFeild = SceneManager.GetActiveScene().name;
 
-            // Ensure this object exists before starting the coroutine
             if (this != null)
             {
                 StartCoroutine(QuitSuddenlyRoutine());
@@ -195,7 +192,6 @@ public class PlayerHealth : Singleton<PlayerHealth>
     {
         yield return new WaitForSeconds(0.5f);
 
-        // Check if the object still exists before proceeding
         if (this != null)
         {
             Destroy(gameObject);
@@ -220,10 +216,4 @@ public class PlayerHealth : Singleton<PlayerHealth>
         healthSlider.maxValue = maxHealth;
         healthSlider.value = currentHealth;
     }
-
-    /*private void OnDestroy()
-    {
-        StopAllCoroutines();
-    }*/
-
 }

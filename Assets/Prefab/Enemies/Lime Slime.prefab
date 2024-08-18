@@ -36,7 +36,7 @@ Transform:
   m_GameObject: {fileID: 3121600059521408799}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.92, y: -4.08, z: -0.076769955}
+  m_LocalPosition: {x: 0, y: 0, z: -0.076769955}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roamChangeDirFloat: 2
-  attackRange: 5
+  attackRange: 6
   enemyType: {fileID: 3317643968760150895}
   attackCooldown: 2
   stopMovingWhileAttacking: 1
@@ -157,9 +157,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a178be04d472f2d46a51cbd366c314fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 3
+  startingHealth: 5
   deathVFXPrefab: {fileID: 6062435374932228569, guid: 717ce44cb7fb9c14c8fbb724219a6fca, type: 3}
-  knockBackThrust: 15
+  knockBackThrust: 12
 --- !u!114 &6625280639975695582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,13 +217,11 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1493350120559198424, guid: 2c514d0bfc10e844796b8121a258d8a7, type: 3}
   bulletMoveSpeed: 5
   burstCount: 3
-  projectilesPerBurst: 1
+  projectilesPerBurst: 10
   angleSpread: 0
-  startingDistance: 0.1
-  timeBetweenBursts: 0.3
+  startingDistance: 0.5
+  timeBetweenBursts: 0.5
   restTime: 1
-  stagger: 0
-  oscillate: 0
 --- !u!50 &6656316899825357685
 Rigidbody2D:
   serializedVersion: 4

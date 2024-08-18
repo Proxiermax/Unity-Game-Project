@@ -15,6 +15,7 @@ public class GameOver : MonoBehaviour
 
     public void TryAgain()
     {
+
         if (deathAtLevel == "Lv01-01" || deathAtLevel == "Lv01-02" || deathAtLevel == "Lv01-03")
         {
             SceneManager.LoadScene("Lv01-01");

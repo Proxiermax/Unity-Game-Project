@@ -9,6 +9,7 @@ public class Staff : MonoBehaviour, IWeapon
     [SerializeField] private Transform magicLaserSpawnPoint;
 
     private Animator myAnimator;
+    AudioManager audioManager;
 
     readonly int ATTACK_HASH = Animator.StringToHash("Attack");
 
@@ -20,12 +21,19 @@ public class Staff : MonoBehaviour, IWeapon
     private void Update()
     {
         MouseFollowWithOffset();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
 
 
     public void Attack()
     {
         myAnimator.SetTrigger(ATTACK_HASH);
+        ActiveStaffSound();
+    }
+
+    private void ActiveStaffSound()
+    {
+        audioManager.PlaySFX(audioManager.magicSound, 0.5f);
     }
 
     public void SpawnStaffProjectileAnimEvent()
